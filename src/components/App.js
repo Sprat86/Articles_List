@@ -8,8 +8,6 @@ class App extends PureComponent {
 		reverted: false
 	}
 
-	articles = articles.slice();
-
 	render () {		
 	return(
 		<div className= 'contaner'>
@@ -19,13 +17,12 @@ class App extends PureComponent {
 					<button className="btn btn-outline-primary btn-lg ml-5" onClick = {this.revert}>Revert</button>
 				</h1>				
 			</div>	
-			<ArticleList articles = {this.articles} />
+			<ArticleList articles = {this.state.reverted ? articles.slice().reverse() : articles} />
 		</div>
 		)
 	}
 
-	revert = () => {
-		this.articles.reverse();
+	revert = () => {		
 		this.setState({
 		reverted: !this.state.reverted
 		})
