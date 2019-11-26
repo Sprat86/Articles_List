@@ -1,47 +1,46 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 
-class Article extends Component {
+class Article extends PureComponent {
 	// Основная запись состояния компонента через конструктор:
 	constructor(props){
 		super(props)
 
-		this.state = {
-			isOpen: props.defaultOpen,
+		this.state = {			
 			count: 0
 		}
 	}
 
 	// Экспериментальная запись: 
-	// state = {
-	// 	isOpen: props.defaultOpen
-	// }
+	/*state = {
+		isOpen: props.defaultOpen
+	}*/
 
-	shouldComponentUpdate (nextProps, nextState) {
+	/*shouldComponentUpdate (nextProps, nextState) {
 		return this.state.isOpen !== nextState.isOpen || this.state.count !== nextState.count
-	}
+	}*/
 
 	componentWillMount () {
 		console.log('component mounting');
 	}
 
-	componentWillReceiveProps (nextProps){
+	/*componentWillReceiveProps (nextProps){
 		if (nextProps.defaultOpen !== this.props.defaultOpen) {
 			this.setState({
 				isOpen: nextProps.defaultOpen
 			})
 		}
-	}	
+	}	*/
 
 	componentWillUpdate () {
 		// console.log('will update');
 	}
 
 	render () {
-		const {article} = this.props;
+		const {article, isOpen} = this.props;
 		// console.log(this.props);
 		// В переменной body ставим условие: если this.state.isOpen в состоянии true, то показываем текст article.text,
 		// если в состоянии false - рендерим "пустоту":
-		const body = this.state.isOpen && <section className= 'card-text'>{article.text}</section>
+		const body = isOpen && <section className= 'card-text'>{article.text}</section>
 		return (
 			<div className= 'card mx-auto' style={{width: '50%'}}>
 				<div className= 'card-header'>
@@ -50,7 +49,7 @@ class Article extends Component {
 						<br />
 						clicked {this.state.count}
 						<button onClick={this.handleClick} className="btn btn-primary btn-lg float-right">
-							{this.state.isOpen ? 'close' : 'open'}
+							{isOpen ? 'close' : 'open'}
 						</button>
 					</h2>
 				</div>
@@ -62,13 +61,6 @@ class Article extends Component {
 				</div>
 			</div>
 		)
-	}
-
-	handleClick = () => {
-		// console.log('---', 'clicked');
-		this.setState({
-			isOpen: !this.state.isOpen
-		});
 	}
 
 	incrementCounter = () => {
