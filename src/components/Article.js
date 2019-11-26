@@ -6,14 +6,35 @@ class Article extends Component {
 		super(props)
 
 		this.state = {
-			isOpen: props.defaultOpen
+			isOpen: props.defaultOpen,
+			count: 0
 		}
 	}
 
 	// Экспериментальная запись: 
 	// state = {
-	// 	isOpen: true,
+	// 	isOpen: props.defaultOpen
 	// }
+
+	shouldComponentUpdate (nextProps, nextState) {
+		return this.state.isOpen !== nextState.isOpen || this.state.count !== nextState.count
+	}
+
+	componentWillMount () {
+		console.log('component mounting');
+	}
+
+	componentWillReceiveProps (nextProps){
+		if (nextProps.defaultOpen !== this.props.defaultOpen) {
+			this.setState({
+				isOpen: nextProps.defaultOpen
+			})
+		}
+	}	
+
+	componentWillUpdate () {
+		console.log('will update');
+	}
 
 	render () {
 		const {article} = this.props;
@@ -24,8 +45,10 @@ class Article extends Component {
 		return (
 			<div className= 'card mx-auto' style={{width: '50%'}}>
 				<div className= 'card-header'>
-					<h2>
+					<h2 onClick={this.incrementCounter}>
 						{article.title}
+						<br />
+						clicked {this.state.count}
 						<button onClick={this.handleClick} className="btn btn-primary btn-lg float-right">
 							{this.state.isOpen ? 'close' : 'open'}
 						</button>
@@ -42,10 +65,16 @@ class Article extends Component {
 	}
 
 	handleClick = () => {
-		console.log('---', 'clicked');
+		// console.log('---', 'clicked');
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
+	}
+
+	incrementCounter = () => {
+		this.setState({
+			count: this.state.count + 1
+		})
 	}
 }
 

@@ -11,7 +11,7 @@ class App extends Component {
 	render () {
 	return(
 		<div className= 'contaner'>
-			<div className= 'jumbotron'>
+			<div className= 'jumbotron'> 
 				<h1 className= 'display-3'>
 					Articles list
 					<button className="btn btn-outline-primary btn-lg ml-5" onClick = {this.revert}>Revert</button>
