@@ -33,7 +33,7 @@ class Article extends Component {
 	}	
 
 	componentWillUpdate () {
-		console.log('will update');
+		// console.log('will update');
 	}
 
 	render () {
