@@ -12,7 +12,7 @@ class Article extends PureComponent {
 
 	// Экспериментальная запись: 
 	/*state = {
-		isOpen: props.defaultOpen
+		count: 0
 	}*/
 
 	/*shouldComponentUpdate (nextProps, nextState) {
@@ -36,9 +36,9 @@ class Article extends PureComponent {
 	}
 
 	render () {
-		const {article, isOpen} = this.props;
+		const {article, isOpen, onButtonClick} = this.props;
 		// console.log(this.props);
-		// В переменной body ставим условие: если this.state.isOpen в состоянии true, то показываем текст article.text,
+		// В переменной body ставим условие: если isOpen в состоянии true, то показываем текст article.text,
 		// если в состоянии false - рендерим "пустоту":
 		const body = isOpen && <section className= 'card-text'>{article.text}</section>
 		return (
@@ -48,7 +48,7 @@ class Article extends PureComponent {
 						{article.title}
 						<br />
 						clicked {this.state.count}
-						<button onClick={this.handleClick} className="btn btn-primary btn-lg float-right">
+						<button onClick={onButtonClick} className="btn btn-primary btn-lg float-right">
 							{isOpen ? 'close' : 'open'}
 						</button>
 					</h2>
