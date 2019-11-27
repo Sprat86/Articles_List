@@ -14,25 +14,13 @@ class Article extends PureComponent {
 	/*state = {
 		count: 0
 	}*/
-
-	/*shouldComponentUpdate (nextProps, nextState) {
-		return this.state.isOpen !== nextState.isOpen || this.state.count !== nextState.count
-	}*/
-
+	
 	componentWillMount () {
 		console.log('component mounting');
 	}
-
-	/*componentWillReceiveProps (nextProps){
-		if (nextProps.defaultOpen !== this.props.defaultOpen) {
-			this.setState({
-				isOpen: nextProps.defaultOpen
-			})
-		}
-	}	*/
-
+	
 	componentWillUpdate () {
-		// console.log('will update');
+		console.log('will update');
 	}
 
 	render () {
